@@ -5,7 +5,7 @@ import torch
 import torch.nn.functional as F
 from typing import Optional, List
 
-model_path = "/data3/fujinji/models/Qwen2.5-7B-Instruct"
+model_path = "/data3/models/GLM/GLM-Z1-9B-0414"
 model = AutoModelForCausalLM.from_pretrained(
     model_path,
     torch_dtype=torch.bfloat16,
@@ -123,7 +123,7 @@ def passthrough_collator(features):
 args = TrainingArguments(
     output_dir="./raat_ckpt",
     learning_rate=1e-5,
-    num_train_epochs=1,
+    num_train_epochs=2,
     per_device_train_batch_size=2,
     per_device_eval_batch_size=2,
     gradient_accumulation_steps=4,  
