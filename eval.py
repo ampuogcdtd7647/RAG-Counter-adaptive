@@ -6,11 +6,9 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 from peft import PeftModel
 import numpy as np
 
-# ====== 你项目里的提示格式 ======
 def build_prompt(query, ctx):
     return f"问题：{query}\n参考：{ctx}\n回答："
 
-# ====== 基础 EM / 字符级F1 ======
 def normalize(s):
     return "".join(s.strip().split())
 
@@ -47,7 +45,6 @@ def bge_encode(texts):
 def cos_sim(a, b):
     return float(np.dot(a, b))
 
-# ====== 生成器 ======
 @torch.inference_mode()
 def generate_batch(model, tokenizer, prompts, max_new_tokens=128, temperature=0.0, top_p=1.0):
     inputs = tokenizer(prompts, return_tensors="pt", padding=True, truncation=True, max_length=4096).to(model.device)
